@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(isset($sliders) && $sliders->count())
-        <div class="slider-fullwidth position-relative mb-5" style="left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; max-width: 100vw;">
-            <div id="blogSlider" class="carousel slide" data-bs-ride="carousel">
+    <div class="container">
+        @if(isset($sliders) && $sliders->count())
+            <div id="blogSlider" class="carousel slide mb-5" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @foreach($sliders as $slider)
                         <div class="carousel-item @if($loop->first) active @endif">
-                            <img src="{{ asset('storage/' . $slider->image) }}" class="d-block w-100 rounded-0" alt="{{ $slider->title }}" style="max-height:350px;object-fit:cover;">
+                            <img src="{{ asset('storage/' . $slider->image) }}" class="d-block w-100 rounded" alt="{{ $slider->title }}" style="max-height:350px;object-fit:cover;">
                             <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
                                 @if($slider->title)
                                     <h5 class="fw-bold">{{ $slider->title }}</h5>
@@ -28,9 +28,7 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        </div>
-    @endif
-    <div class="container">
+        @endif
         <h1 class="mb-4 fw-bold">Blog Posts</h1>
         @if($posts->count())
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
