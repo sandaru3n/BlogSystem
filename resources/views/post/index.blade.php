@@ -1,6 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(isset($sliders) && $sliders->count())
+        <div class="slider-fullwidth position-relative mb-5" style="left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; max-width: 100vw;">
+            <div id="blogSlider" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach($sliders as $slider)
+                        <div class="carousel-item @if($loop->first) active @endif">
+                            <img src="{{ asset('storage/' . $slider->image) }}" class="d-block w-100 rounded-0" alt="{{ $slider->title }}" style="max-height:350px;object-fit:cover;">
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-3">
+                                @if($slider->title)
+                                    <h5 class="fw-bold">{{ $slider->title }}</h5>
+                                @endif
+                                @if($slider->description)
+                                    <p>{{ $slider->description }}</p>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#blogSlider" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#blogSlider" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    @endif
     <div class="container">
         <h1 class="mb-4 fw-bold">Blog Posts</h1>
         @if($posts->count())

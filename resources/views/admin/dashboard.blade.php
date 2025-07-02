@@ -22,14 +22,19 @@
         </div>
     </div>
     <div class="row mb-4">
-        <div class="col-md-6 mb-2">
+        <div class="col-md-4 mb-2">
             <a href="{{ route('admin.manage-posts') }}" class="btn btn-lg btn-outline-primary w-100">
                 <i class="bi bi-file-earmark-text"></i> Manage Posts
             </a>
         </div>
-        <div class="col-md-6 mb-2">
+        <div class="col-md-4 mb-2">
             <a href="{{ route('admin.categories.index') }}" class="btn btn-lg btn-outline-secondary w-100">
                 <i class="bi bi-tags"></i> Manage Categories
+            </a>
+        </div>
+        <div class="col-md-4 mb-2">
+            <a href="{{ route('sliders.index') }}" class="btn btn-lg btn-outline-info w-100">
+                <i class="bi bi-images"></i> Manage Sliders
             </a>
         </div>
     </div>

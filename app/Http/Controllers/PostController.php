@@ -6,15 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
+use App\Models\Slider;
 
 class PostController extends Controller
 {
     public function index() {
         $posts = Post::with('category')->latest()->paginate(10);
+        $sliders = Slider::where('active', 1)->orderBy('order')->get();
         if (request()->routeIs('admin.*')) {
             return view('admin.posts.index', compact('posts'));
         }
-        return view('post.index', compact('posts'));
+        return view('post.index', compact('posts', 'sliders'));
     }
 
     public function show(Post $post) {

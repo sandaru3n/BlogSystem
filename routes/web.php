@@ -37,6 +37,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/profile/update', [App\Http\Controllers\AdminController::class, 'updateProfile'])->name('admin.profile.update');
 });
 
+// Admin slider routes
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::resource('sliders', App\Http\Controllers\AdminSliderController::class)->except(['show']);
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
