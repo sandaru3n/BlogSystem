@@ -28,4 +28,12 @@
             <div class="alert alert-info">No posts found. Check back soon!</div>
         @endif
     </div>
+@endsection
+
+@section('footer')
+<footer class="bg-white border-top py-3 mt-5">
+    <div class="container text-center">
+        <small>&copy; {{ date('Y') }} BlogSystem. All rights reserved. | <a href="/">Home</a> | <a href="/contact">Contact</a></small>
+    </div>
+</footer>
 @endsection 

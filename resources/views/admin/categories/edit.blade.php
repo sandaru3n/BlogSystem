@@ -27,4 +27,7 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('nofooter')
 @endsection 
