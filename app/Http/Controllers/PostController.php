@@ -45,14 +45,16 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:posts,slug',
+            'excerpt' => 'required|string|max:255',
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
             'featured_image' => 'nullable|image|max:2048',
         ]);
-        $data = $request->only(['title', 'slug', 'content', 'category_id']);
+        $data = $request->only(['title', 'slug', 'excerpt', 'content', 'category_id']);
         if ($request->hasFile('featured_image')) {
             $data['featured_image'] = $request->file('featured_image')->store('posts', 'public');
         }
+        $data['user_id'] = Auth::id();
         $post = Post::create($data);
         return redirect()->route('admin.posts.index')->with('status', 'Post created!');
     }
@@ -66,11 +68,12 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:posts,slug,' . $post->id,
+            'excerpt' => 'required|string|max:255',
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
             'featured_image' => 'nullable|image|max:2048',
         ]);
-        $data = $request->only(['title', 'slug', 'content', 'category_id']);
+        $data = $request->only(['title', 'slug', 'excerpt', 'content', 'category_id']);
         if ($request->hasFile('featured_image')) {
             $data['featured_image'] = $request->file('featured_image')->store('posts', 'public');
         }

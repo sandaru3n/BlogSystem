@@ -26,6 +26,13 @@
                     <input type="text" name="slug" id="slug" class="form-control" required value="{{ old('slug', $post->slug) }}">
                 </div>
                 <div class="mb-3">
+                    <label for="excerpt" class="form-label">Excerpt</label>
+                    <textarea name="excerpt" id="excerpt" class="form-control @error('excerpt') is-invalid @enderror" rows="2" required>{{ old('excerpt', $post->excerpt) }}</textarea>
+                    @error('excerpt')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
                     <select name="category_id" id="category_id" class="form-select" required>
                         <option value="">Select Category</option>

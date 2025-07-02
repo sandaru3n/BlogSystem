@@ -31,6 +31,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('categories', CategoryController::class);
 });
 
+// Admin profile routes
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/profile/edit', [App\Http\Controllers\AdminController::class, 'editProfile'])->name('admin.profile.edit');
+    Route::post('/profile/update', [App\Http\Controllers\AdminController::class, 'updateProfile'])->name('admin.profile.update');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

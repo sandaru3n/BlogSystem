@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-lg-8">
+    <div class="col-lg-8 order-2 order-lg-1">
         <div class="card shadow-lg border-0 mb-4">
             @if($post->featured_image)
                 <img src="{{ asset('storage/' . $post->featured_image) }}" class="card-img-top rounded-top" alt="{{ $post->title }}">
@@ -59,6 +59,18 @@
             </div>
         </section>
         @endauth
+    </div>
+    <div class="col-lg-4 mb-4 mb-lg-0 order-1 order-lg-2">
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center">
+                <img src="https://ui-avatars.com/api/?name={{ urlencode($post->user->name ?? 'Unknown') }}&background=4e73df&color=fff&size=80" class="rounded-circle mb-3" width="80" height="80" alt="Author Avatar">
+                <h5 class="fw-bold mb-1">{{ $post->user->name ?? 'Unknown' }}</h5>
+                <p class="text-muted mb-1">{{ $post->user->email ?? '' }}</p>
+                @if(!empty($post->user->bio))
+                    <p class="mt-2">{{ $post->user->bio }}</p>
+                @endif
+            </div>
+        </div>
     </div>
 </div>
 @endsection
