@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Check if the user has a given role.
+     */
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
 }

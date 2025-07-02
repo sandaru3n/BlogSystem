@@ -22,6 +22,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 });
 
+// Admin Panel Routes
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
