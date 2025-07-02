@@ -18,7 +18,8 @@ class PostController extends Controller
     }
 
     public function show(Post $post) {
-        return view('post.show', compact('post'));
+        $latestPosts = Post::where('id', '!=', $post->id)->latest()->take(5)->get();
+        return view('post.show', compact('post', 'latestPosts'));
     }
 
     public function storeComment(Request $request, Post $post) {

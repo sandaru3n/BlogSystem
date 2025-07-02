@@ -61,13 +61,29 @@
         @endauth
     </div>
     <div class="col-lg-4 mb-4 mb-lg-0 order-1 order-lg-2">
-        <div class="card shadow-sm border-0">
+        <div class="card shadow-sm border-0 mb-4">
             <div class="card-body text-center">
                 <img src="https://ui-avatars.com/api/?name={{ urlencode($post->user->name ?? 'Unknown') }}&background=4e73df&color=fff&size=80" class="rounded-circle mb-3" width="80" height="80" alt="Author Avatar">
                 <h5 class="fw-bold mb-1">{{ $post->user->name ?? 'Unknown' }}</h5>
                 <p class="text-muted mb-1">{{ $post->user->email ?? '' }}</p>
                 @if(!empty($post->user->bio))
                     <p class="mt-2">{{ $post->user->bio }}</p>
+                @endif
+            </div>
+        </div>
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3 border-bottom pb-2">Latest Posts</h5>
+                @if($latestPosts->count())
+                    <ul class="list-unstyled mb-0">
+                        @foreach($latestPosts as $latest)
+                            <li class="mb-2">
+                                <a href="{{ route('post.show', $latest->slug) }}" class="text-decoration-none">{{ $latest->title }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p class="text-muted mb-0">No recent posts.</p>
                 @endif
             </div>
         </div>
