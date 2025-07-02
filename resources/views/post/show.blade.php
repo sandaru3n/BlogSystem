@@ -31,6 +31,34 @@
                 <div class="alert alert-info">No comments yet. Be the first to comment!</div>
             @endforelse
         </section>
+        @auth
+        <section id="add-comment" class="mt-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Add a Comment</h5>
+                    @if(session('status'))
+                        <div class="alert alert-success">{{ session('status') }}</div>
+                    @endif
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('post.comment', $post->slug) }}">
+                        @csrf
+                        <div class="mb-3">
+                            <textarea name="content" class="form-control" rows="3" placeholder="Write your comment..." required>{{ old('content') }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Comment</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        @endauth
     </div>
 </div>
 @endsection

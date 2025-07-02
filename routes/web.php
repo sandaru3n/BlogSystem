@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 // Frontend Routes
 Route::get('/', [PostController::class, 'index']);
-Route::get('/post/{post:slug}', [PostController::class, 'show']);
+Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
+Route::post('/post/{post:slug}/comment', [PostController::class, 'storeComment'])->middleware('auth')->name('post.comment');
 
 
 
