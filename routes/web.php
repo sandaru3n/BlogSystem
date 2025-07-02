@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
-// use App\Http\Controllers\CategoryController; // Uncomment if you create this controller
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 
 // Frontend Routes
@@ -14,18 +14,21 @@ Route::post('/post/{post:slug}/comment', [PostController::class, 'storeComment']
 
 
 // Admin Routes
-Route::prefix('admin')->middleware(['auth'])->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard']);
-    
-    Route::middleware('role:admin')->group(function () {
-        Route::resource('posts', PostController::class);
-        // Route::resource('categories', CategoryController::class); // Uncomment if you create this controller
-    });
-});
+// Route::prefix('admin')->middleware(['auth'])->group(function () {
+//     Route::get('/', [AdminController::class, 'dashboard']);
+//     
+//     Route::middleware('role:admin')->group(function () {
+//         Route::resource('posts', PostController::class);
+//         // Route::resource('categories', CategoryController::class); // Uncomment if you create this controller
+//     });
+// });
 
 // Admin Panel Routes
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/manage-posts', [PostController::class, 'index'])->name('manage-posts');
+    Route::resource('posts', PostController::class);
+    Route::resource('categories', CategoryController::class);
 });
 
 Auth::routes();
